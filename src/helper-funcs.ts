@@ -1,5 +1,5 @@
 export function msgLog(msg: string): void {
-    console.log(`[${new Date().toString()}]: ${msg}`);
+    console.log(`[${new Date().toString()}] ${msg}`);
 }
 
 // Kiểm tra tính hợp lệ của url

@@ -1,15 +1,15 @@
 import { assertEquals } from "@std/assert/equals";
 import { generateV4UUID } from "../src/helper-funcs.ts";
-import { NewsSearchData } from "../src/search-data-models.ts";
+import { NewsData } from "../src/search-data-models.ts";
 import { Language } from "../src/support-languages.ts";
 
-Deno.test("NewsSearchData validation test", (): void => {
+Deno.test("NewsData validation test", (): void => {
     const validId = generateV4UUID();
     const validDate = new Date();
     const validUrl = "https://example.com";
 
     // ✅ Hợp lệ đầy đủ
-    const validData = new NewsSearchData(
+    const validData = new NewsData(
         validId,
         "Naruto trở lại",
         "https://example.com/image.png",
@@ -21,7 +21,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(validData.isValid(), true);
 
     // ❌ Sai ID (không phải UUID v4)
-    const invalidIdData = new NewsSearchData(
+    const invalidIdData = new NewsData(
         "12345",
         "Naruto trở lại",
         null,
@@ -33,7 +33,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(invalidIdData.isValid(), false);
 
     // ❌ Tiêu đề quá ngắn
-    const shortTitleData = new NewsSearchData(
+    const shortTitleData = new NewsData(
         validId,
         "A",
         null,
@@ -45,7 +45,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(shortTitleData.isValid(), false);
 
     // ❌ Thumbnail URL không hợp lệ
-    const invalidThumbData = new NewsSearchData(
+    const invalidThumbData = new NewsData(
         validId,
         "Naruto trở lại",
         "not-a-url",
@@ -57,7 +57,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(invalidThumbData.isValid(), false);
 
     // ❌ Content không hợp lệ
-    const invalidContentData = new NewsSearchData(
+    const invalidContentData = new NewsData(
         validId,
         "Naruto trở lại",
         null,
@@ -69,7 +69,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(invalidContentData.isValid(), false);
 
     // ❌ Datetime không phải Date
-    const invalidDateData = new NewsSearchData(
+    const invalidDateData = new NewsData(
         validId,
         "Naruto trở lại",
         null,
@@ -81,7 +81,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(invalidDateData.isValid(), false);
 
     // ❌ Original URL không hợp lệ
-    const invalidUrlData = new NewsSearchData(
+    const invalidUrlData = new NewsData(
         validId,
         "Naruto trở lại",
         null,
@@ -93,7 +93,7 @@ Deno.test("NewsSearchData validation test", (): void => {
     assertEquals(invalidUrlData.isValid(), false);
 
     // Test với dữ liệu tiếng nhật
-    const japData = new NewsSearchData(
+    const japData = new NewsData(
         validId,
         "ナルト新作", // Tiêu đề tiếng Nhật
         "https://example.com/thumb.jpg", // Thumbnail hợp lệ
@@ -106,7 +106,7 @@ Deno.test("NewsSearchData validation test", (): void => {
 });
 
 Deno.test("data-model log test", (): void => {
-    const japData = new NewsSearchData(
+    const japData = new NewsData(
         generateV4UUID(),
         "ナルト新作", // Tiêu đề tiếng Nhật
         "https://example.com/thumb.jpg", // Thumbnail hợp lệ
