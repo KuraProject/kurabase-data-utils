@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert/equals";
+import { assertEquals } from "@std/assert";
 import { generateV4UUID } from "../src/helper-funcs.ts";
 import { NewsData } from "../src/search-data-models.ts";
 import { Language } from "../src/support-languages.ts";
